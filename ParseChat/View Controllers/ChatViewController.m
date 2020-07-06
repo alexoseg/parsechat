@@ -29,6 +29,7 @@
 
 -(void)refreshFeed{
     PFQuery *query = [PFQuery queryWithClassName:@"Message_fbu2019"];
+    [query includeKey:@"user"]; 
     [query orderByDescending:@"createdAt"];
     
     typeof(self) __weak weakSelf = self;
@@ -45,6 +46,7 @@
 - (IBAction)sendMessage:(id)sender {
     PFObject *const chatMessage = [PFObject objectWithClassName:@"Message_fbu2019"];
     chatMessage[@"text"] = self.messageTextField.text;
+    chatMessage[@"user"] = PFUser.currentUser;
     [chatMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"The message was saved!");
@@ -57,6 +59,13 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
     PFObject *object = self.messages[indexPath.row];
+    PFUser *user = object[@"user"];
+    
+    if(user != nil){
+        cell.usernameLabel.text = user.username;
+    } else {
+        cell.usernameLabel.text = @"🤖";
+    }
     cell.messageLabel.text = object[@"text"];
     return cell;
 }
