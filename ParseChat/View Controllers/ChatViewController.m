@@ -8,9 +8,13 @@
 
 #import "ChatViewController.h"
 #import <Parse/Parse.h>
+#import "ChatCell.h"
 
-@interface ChatViewController ()
+@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *messages;
 
 @end
 
@@ -18,11 +22,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshFeed) userInfo:nil repeats:true];
+}
+
+-(void)refreshFeed{
+    PFQuery *query = [PFQuery queryWithClassName:@"Message_fbu2019"];
+    [query orderByDescending:@"createdAt"];
+    
+    typeof(self) __weak weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error != nil){
+            NSLog(@"%@", [error localizedDescription]);
+        } else {
+            weakSelf.messages = objects;
+            [weakSelf.tableView reloadData];
+        }
+    }];
 }
 
 - (IBAction)sendMessage:(id)sender {
-    PFObject *const chatMessage = [PFObject objectWithClassName:@"Message_fbu2020"];
+    PFObject *const chatMessage = [PFObject objectWithClassName:@"Message_fbu2019"];
     chatMessage[@"text"] = self.messageTextField.text;
     [chatMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
@@ -31,6 +52,17 @@
             NSLog(@"Problem saving the message %@", error.localizedDescription);
         }
     }];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
+    PFObject *object = self.messages[indexPath.row];
+    cell.messageLabel.text = object[@"text"];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.messages.count;
 }
 
 /*

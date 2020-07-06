@@ -60,7 +60,7 @@
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if(error == nil){
-            NSLog(@"User Registered Successfully");
+            NSLog(@"User Logged In Successfully");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         } else {
             [self displayAlertWithMessage:error.localizedDescription andTitle:@"Login Error"];
@@ -72,6 +72,7 @@
     [self registerUser];
 }
 - (IBAction)loginUser:(id)sender {
+    [self loginUser];
 }
 
 /*
