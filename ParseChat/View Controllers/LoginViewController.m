@@ -47,6 +47,7 @@
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"User Registered Successfully");
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil]; 
         } else {
             [self displayAlertWithMessage:error.localizedDescription andTitle:@"Sign up error"];
         }
@@ -60,6 +61,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if(error == nil){
             NSLog(@"User Registered Successfully");
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         } else {
             [self displayAlertWithMessage:error.localizedDescription andTitle:@"Login Error"];
         }
