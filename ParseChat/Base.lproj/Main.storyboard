@@ -98,18 +98,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdH-t9-eKB">
-                                                    <rect key="frame" x="20" y="44" width="374" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdH-t9-eKB">
+                                                    <rect key="frame" x="35" y="26" width="42" height="56"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qdH-t9-eKB" firstAttribute="leading" secondItem="EZJ-fy-REB" secondAttribute="leadingMargin" id="RCO-eB-dn2"/>
-                                                <constraint firstItem="qdH-t9-eKB" firstAttribute="trailing" secondItem="EZJ-fy-REB" secondAttribute="trailingMargin" id="W7N-eR-NVK"/>
-                                                <constraint firstItem="qdH-t9-eKB" firstAttribute="top" secondItem="EZJ-fy-REB" secondAttribute="topMargin" constant="33" id="gDQ-jF-J4y"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="qdH-t9-eKB" secondAttribute="bottom" constant="33" id="pXz-Qt-kPw"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="qdH-t9-eKB" secondAttribute="trailing" constant="15" id="PfY-tG-DSV"/>
+                                                <constraint firstItem="qdH-t9-eKB" firstAttribute="top" secondItem="EZJ-fy-REB" secondAttribute="topMargin" constant="15" id="gDQ-jF-J4y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qdH-t9-eKB" secondAttribute="bottom" constant="15" id="pXz-Qt-kPw"/>
+                                                <constraint firstItem="qdH-t9-eKB" firstAttribute="leading" secondItem="EZJ-fy-REB" secondAttribute="leadingMargin" constant="15" id="uKQ-t9-h2j"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
